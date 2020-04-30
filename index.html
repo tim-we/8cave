@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>the 8cave Project</title>
+  <script src="./js/gamecontrols.js"></script>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <div id="top_bar">
+    <span style="position: relative; left: 10px; font-size: 14px; color: rgb(150,150,150);">github.com » tim-we » projects » 8cave</span>
+  </div>
+  <iframe id="game_frame" src="iframe/index.html"></iframe>
+  <iframe id="hs_frame" src="iframe/highscore.html" style="display: none;"></iframe>
+  <div id="bottom_bar">
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align: left;"><div id="highscore_btn" class="bottom_bar_btn" onclick="highscore();"></div></td>
+          <td style="text-align: center;"><span id="copyrightnote">Copyright &copy; 2011 - 2020 - Tim Weißenfels</span></td>
+          <td style="text-align: right;"><div id="fullscreen_btn" class="bottom_bar_btn" onclick="fullScreen8cave()"></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

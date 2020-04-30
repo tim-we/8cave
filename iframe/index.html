@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <meta name="application-name" content="8cave: The Game">
+  <meta name="description" content="8cave is a game inspired by the popular windows phone 7/8 game 7cave. Get through the random generated cave and avoid the deadly barriers.">
+  <meta name="author" content="Tim Weißenfels">
+  <meta name="keywords" content="html5, javascript, canvas game, 7cave, helicopter game, new version, highscore, online">
+  
+	<title>8cave</title>
+	
+	<!-- online-script removed -->
+	<script src="game.js?v=135"></script>
+	<script>
+    // this part used to be generated with PHP
+	  var AP_Settings = { PlayerColor: [255,0,0], DailyMapSeed: 1337 };
+    //var GameExtraSettings= { limitclicks:10 };
+	</script>
+  <style type="text/css">
+    @-ms-viewport{width:device-width}
+    
+    /* font added to remove OS dependence */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 400;
+      src:
+        local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url('fonts/open-sans-v15-latin-regular.woff2') format('woff2');
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+    }
+
+    /* old code: */
+
+    html { height: 100%; }
+    
+    body {
+        overflow: hidden;
+        padding: 0px;
+        margin: 0px;
+        background-color: rgb(0,0,0);
+        color: rgb(255,255,255);
+        -webkit-user-select: none;
+        background-image: url('./img/aplogo1.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+    }
+    
+    canvas {
+      -ms-content-zoom-limit-max: 100%;
+      -ms-content-zoom-limit-max: 50%;
+      -ms-touch-action: pinch-zoom !important;
+    }
+    
+    #pause {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 70px;
+      height: 70px;
+      background-image: url('./img/btn1.png');
+      background-position: 0px -70px;
+      opacity: 0.8;
+      display: none;
+    }
+    #pause:hover { opacity: 1; }
+    #pause.ingame { display: block; }
+    
+    #bmenu {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 70px;
+      height: 70px;
+      background-image: url('./img/btn1.png');
+      background-position: -70px -70px;
+      opacity: 0.8;
+      display: none;
+    }
+    #bmenu:hover { opacity: 1; }
+    #bmenu.show { display: block; }
+    
+    #mute {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 70px;
+      height: 70px;
+      background-image: url('./img/btn1.png');
+      opacity: 0.8;
+      display: none;
+    }
+    #mute:hover { opacity: 1; }
+    #mute.show { display: block; }
+    #mute.mtrue { background-position: 0px 0px; }
+    #mute.mfalse { background-position: -70px 0px; }
+    
+    #menu {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+      background-color: rgb(0,0,0);
+      background-image: url('./img/menubg.png?v=2');
+      background-size: auto 100%;
+      background-repeat: repeat-x;
+      display: none;
+      animation: menu_move 80s linear infinite;
+    }
+
+    #mlogo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -235px;
+      margin-left: -370px;
+      width: 207px;
+      height: 460px;
+      background-image: url('./img/menulogo.png?v=2');
+    }
+    
+    #online_status {
+			position: absolute;
+			top: 1%;
+			right: 1%;
+			font-weight: bold;
+			font-size: 16px;
+			color: rgb(255,0,0);
+    }
+    
+    #version_info {
+			position: absolute;
+			bottom: 1%;
+			right: 1%;
+			font-weight: bold;
+			font-size: 16px;
+			color: rgb(0,0,255);
+    }
+
+    #menubtns {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -260px;
+      margin-left: -120px;
+      width: 472px;
+      height: 482px;
+      text-align: center;
+    }
+
+    #menubtns > div {
+      color: #ffffff;
+      text-shadow: 2px 2px rgba(0,0,0,0.4);
+      margin: 5px;
+      display: inline-block;
+      font-size: 46px;
+      font-weight: bold;
+      vertical-align: middle;
+      cursor: pointer;
+      
+      background-color: rgba(0,0,0,0);
+      background-image: url('./img/menu_btn.png');
+      width: 404px;
+      height: 149px;
+      line-height: 150px;
+      margin-bottom: 10px;
+      transform: scale(1, 1) rotate(0deg);
+      transition: 0.2s;
+    }
+    
+    #menubtns > div span.daily {
+			font-size: 20px;
+			transform: scale(1.5,1.5) rotate(20deg) translate(-5px,-20px);
+			display: inline-block;
+			line-height: 20px;
+			background-color: rgb(255,255,0);
+			color: rgb(255,0,0);
+			text-shadow: none;
+			width: 50px;
+			height: 22px;
+			animation: dailyanim 2s infinite;
+    }
+    
+    #menubtns > div:hover {
+      transform: scale(1.05, 1.05) rotate(5deg);
+      transition: 0.2s;
+    }
+    
+    #menubtns > div.disabled { opacity: 0.4; }
+    
+    #menubtns > div.disabled:hover {
+      transform: scale(1, 1) rotate(0deg);
+    }
+    
+    @media (max-height: 600px) {
+      #menubtns { margin-top: -200px; transform: scale(0.8, 0.8); }
+      #menubtns > div.disabled { display: none; }
+      #mlogo { transform: scale(0.8,0.8); }
+    }
+    
+    #menubtns div:nth-child(even) {
+      background-position: -404px 0px;
+      width: 462px;
+      height: 139px;
+      line-height: 120px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    
+    @keyframes menu_move {
+      0%    { background-position: 0% 0%; }
+      100%   { background-position: -1000% 0%; }
+    }
+    @keyframes dailyanim {
+			0%		{ transform: scale(1.5,1.5) rotate(20deg) translate(-5px,-20px); }
+			50% 	{ transform: scale(2,2) rotate(20deg) translate(-5px,-20px); }
+			100%	{ transform: scale(1.5,1.5) rotate(20deg) translate(-5px,-20px); }
+    }
+  </style>
+</head>
+
+<body>
+	<div style="position: fixed; right: 10px;bottom: 10px;color: #ffffff;font-weight: bold;">Loading...</div>
+</body>
+
+</html>

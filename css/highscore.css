@@ -1,0 +1,47 @@
+* { margin: 0px; padding: 0px; line-height: 100%; }
+
+body { 
+  background-color: rgb(64,64,64);
+  color: rgb(191,191,191);
+  font-family: 'Arial';
+}
+
+#hs_title {
+  position: absolute;
+  top: 20px;
+  left: 455px;
+  font-size: 42px;
+  color: rgb(10,10,10);
+}
+
+#hs_content {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  right: 0px;
+  bottom: 50px;
+  width: 100%;
+  height: auto;
+  background-color: rgba(255,255,255,0.2);
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 0;
+}
+
+#hs_content div.hscntside {
+  display: inline-block;
+  height: 100%;
+  font-size: 16px;
+}
+
+#hs_content #left {
+  width: 450px;
+  background-image: url('../img/pokal.png');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: right center;
+}
+#hs_content #right {
+  min-width: 500px;
+  background-color: rgba(0,0,255,0.2);
+}
